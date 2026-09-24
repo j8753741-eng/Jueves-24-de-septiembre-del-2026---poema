@@ -1,7 +1,368 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donde mi corazón te elige sin medida</title>
 
-<
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 210, 180, 0.10), transparent 28%),
+        radial-gradient(circle at 80% 80%, rgba(190, 110, 120, 0.12), transparent 30%),
+        #160d12;
+      color: #f8eee8;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    /* Textura delicada */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px,
+          transparent 3px,
+          rgba(255,255,255,0.05) 4px
+        );
+      z-index: 10;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 35px 18px;
+    }
+
+    .envelope {
+      width: min(100%, 760px);
+      position: relative;
+      opacity: 0;
+      transform: translateY(35px);
+      animation: appear 1.4s ease forwards;
+    }
+
+    /* Línea exterior elegante */
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border: 1px solid rgba(236, 190, 166, 0.25);
+      border-radius: 24px;
+      pointer-events: none;
+    }
+
+    .paper {
+      position: relative;
+      padding: 48px 38px 45px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 247, 239, 0.98),
+          rgba(246, 226, 215, 0.98)
+        );
+      color: #311c21;
+      border-radius: 20px;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+
+    /* Detalle decorativo */
+    .paper::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 1px solid rgba(130, 70, 75, 0.10);
+      top: -80px;
+      right: -70px;
+    }
+
+    .paper::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1px solid rgba(130, 70, 75, 0.08);
+      bottom: -55px;
+      left: -50px;
+    }
+
+    .date {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #93636a;
+      margin-bottom: 27px;
+    }
+
+    .seal {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 27px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #6d2735;
+      color: #f8ded0;
+      font-size: 1.25rem;
+      box-shadow:
+        0 8px 20px rgba(77, 28, 39, 0.25);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(1.55rem, 5vw, 2.45rem);
+      line-height: 1.25;
+      font-weight: normal;
+      letter-spacing: 1px;
+      color: #4a2028;
+      margin-bottom: 35px;
+    }
+
+    .divider {
+      width: 70px;
+      height: 1px;
+      background: #a36c73;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .divider::after {
+      content: "♥";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #f7e7de;
+      padding: 0 8px;
+      color: #8b4652;
+      font-size: 0.75rem;
+    }
+
+    .dedication {
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      color: #603d43;
+    }
+
+    .poem {
+      text-align: center;
+      font-size: clamp(1rem, 2.7vw, 1.13rem);
+      line-height: 2;
+      color: #382329;
+    }
+
+    .poem p {
+      margin-bottom: 22px;
+    }
+
+    .poem strong {
+      color: #6d2735;
+      font-weight: bold;
+    }
+
+    .signature {
+      margin-top: 36px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+      letter-spacing: 2px;
+      color: #6d2735;
+      font-weight: bold;
+    }
+
+    .closing {
+      margin-top: 12px;
+      text-align: center;
+      color: #9a6d73;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .morning-note {
+      text-align: center;
+      margin-top: 30px;
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      color: #9b777d;
+      opacity: 0.9;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.06);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 25px 14px;
+      }
+
+      .paper {
+        padding: 38px 23px 35px;
+        border-radius: 17px;
+      }
+
+      .envelope::before {
+        inset: -6px;
+        border-radius: 21px;
+      }
+
+      .date {
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+      }
+
+      .seal {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 23px;
+      }
+
+      h1 {
+        margin-bottom: 28px;
+      }
+
+      .poem {
+        line-height: 1.85;
+      }
+
+      .poem p {
+        margin-bottom: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <section class="envelope">
+
+      <article class="paper">
+
+        <div class="date">
+          Jueves · 24 de septiembre de 2026
+        </div>
+
+        <div class="seal">
+          ♥
+        </div>
+
+        <h1>
+          ✦ DONDE MI CORAZÓN TE ELIGE SIN MEDIDA ✦
+        </h1>
+
+        <div class="divider"></div>
+
+        <div class="dedication">
+          Para ti, mi Dulce Dueña de mis Suspiros, Valeria.
+        </div>
+
+        <div class="poem">
+
+          <p>
+            Desde temprano dejé estas palabras esperándote,<br>
+            porque quería que, cuando llegaras a ellas,<br>
+            sin importar la hora,<br>
+            supieras que ya había un pedacito de mi corazón<br>
+            pensando solamente en ti.
+          </p>
+
+          <p>
+            Valeria, tú tienes algo que nadie más tiene:<br>
+            la manera de hacer que mi amor<br>
+            quiera quedarse para siempre.
+          </p>
+
+          <p>
+            No sé cómo explicarte todo lo que provocas en mí,<br>
+            pero sí sé esto:<br>
+            cuando pienso en tus ojos, quiero acercarme;<br>
+            cuando recuerdo tus abrazos, quiero quedarme;<br>
+            y cuando pienso en nosotros,<br>
+            mi corazón vuelve a elegirte<br>
+            con una fuerza que no sabe rendirse.
+          </p>
+
+          <p>
+            <strong>Mi Dulce Dueña de mis Suspiros,</strong><br>
+            si pudiera regalarte algo esta mañana,<br>
+            te regalaría la certeza de saber<br>
+            que hay un corazón que te ama<br>
+            con ternura, con locura,<br>
+            con deseo y con toda su verdad.
+          </p>
+
+          <p>
+            Y ese corazón…<br>
+            es completamente tuyo. ❤️
+          </p>
+
+        </div>
+
+        <div class="signature">
+          VALERIA PETRO VILLAZÓN
+        </div>
+
+        <div class="closing">
+          escrito para ti
+        </div>
+
+        <div class="morning-note">
+          Preparado desde temprano, para que lo encuentres cuando quieras.
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+</body>
+            </html>
